@@ -26,5 +26,8 @@
     <color name="material_pink">#e91e63</color>
     <color name="material_purple">#673ab7</color>
     <color name="material_blue">#5677fc</color>
+    <color name="basic_pink">#FF99CC</color>
+    <color name="basic_blue">#CCCCFF</color>
+    <color name="bacic_orange">#FFCCCC</color>
 
 </resources>

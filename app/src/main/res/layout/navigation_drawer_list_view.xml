@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<mmbialas.pl.navigationdrawersi.ui.navigationdrawer.NavigationDrawerView
+<com.nwpu.wsner.ui.navigationdrawer.NavigationDrawerView
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="vertical"
         style="@style/Match">
@@ -19,4 +19,4 @@
             android:choiceMode="singleChoice"
             android:divider="@android:color/transparent"/>
 
-</mmbialas.pl.navigationdrawersi.ui.navigationdrawer.NavigationDrawerView>
+</com.nwpu.wsner.ui.navigationdrawer.NavigationDrawerView>

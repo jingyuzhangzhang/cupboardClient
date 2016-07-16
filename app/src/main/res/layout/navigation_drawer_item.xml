@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<mmbialas.pl.navigationdrawersi.ui.navigationdrawer.NavigationDrawerItemView
+<com.nwpu.wsner.ui.navigationdrawer.NavigationDrawerItemView
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -28,4 +28,4 @@
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/navigationDrawerItemIconIV"
             android:text="@string/app_name"/>
-</mmbialas.pl.navigationdrawersi.ui.navigationdrawer.NavigationDrawerItemView>
+</com.nwpu.wsner.ui.navigationdrawer.NavigationDrawerItemView>

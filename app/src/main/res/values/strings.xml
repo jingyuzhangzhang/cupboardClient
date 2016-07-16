@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Navigation Drawer SI</string>
+    <string name="app_name">化妆柜小管家</string>
     <string name="action_settings">Settings</string>
 
-    <string name="fragment_one">One</string>
-    <string name="fragment_two">Two</string>
-    <string name="fragment_three">Three</string>
+    <string name="fragment_one">测试</string>
+    <string name="fragment_two">物品管理</string>
+    <string name="fragment_three">发现</string>
     <string name="fragment_about">About</string>
 
     <string name="number1">I</string>
@@ -36,4 +36,7 @@
     <string name="about_msg_subject">[NavigationDrawerSI]</string>
     <string name="about_mail_chooser">Send with</string>
     <string name="about_intent_failed">The requested application could not be launched.</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
