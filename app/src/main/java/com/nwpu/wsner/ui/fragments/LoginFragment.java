@@ -1,14 +1,30 @@
 package com.nwpu.wsner.ui.fragments;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 import com.nwpu.wsner.R;
+import com.nwpu.wsner.constants.Url;
+import com.nwpu.wsner.data.Fragments;
+import com.nwpu.wsner.ui.MainActivity;
+
+import butterknife.InjectView;
+import butterknife.OnClick;
+import cz.msebera.android.httpclient.Header;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,6 +45,11 @@ public class LoginFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+
+    SharedPreferences sharedPreferences;
+
+    Button loginButton,signinButton;
+    EditText userNameEditText,pwdEditText;
 
     public LoginFragment() {
         // Required empty public constructor
@@ -55,6 +76,8 @@ public class LoginFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.e("test","onCreate");
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -64,9 +87,59 @@ public class LoginFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        Log.e("test","onCREateView");
+        View view=inflater.inflate(R.layout.fragment_login, container, false);
+
+        init();
+        signinButton = (Button) view.findViewById(R.id.signinButton);
+        loginButton = (Button) view.findViewById(R.id.loginButton);
+        pwdEditText = (EditText) view.findViewById(R.id.pwdEditText);
+        userNameEditText = (EditText) view.findViewById(R.id.userNameEditText);
+        Log.e("test","afterinit");
+
+
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.e("test","sigin onclick");
+                Toast.makeText(getActivity(),"请输入用户名和密码",Toast.LENGTH_LONG).show();
+                if (userNameEditText.getText().equals(null)||pwdEditText.getText().equals(null)){
+                    Toast.makeText(getActivity(),"请输入用户名和密码",Toast.LENGTH_LONG).show();
+                }else {
+                    sharedPreferences= getActivity().getPreferences(Context.MODE_WORLD_WRITEABLE);
+                    SharedPreferences.Editor editor =sharedPreferences.edit();
+                    editor.putString("name", String.valueOf(userNameEditText.getText()));
+                    editor.putString("pwd", String.valueOf(pwdEditText.getText()));
+                    AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
+                    RequestParams requestParams = new RequestParams();
+                    requestParams.put("name", String.valueOf(userNameEditText.getText()));
+                    requestParams.put("pwd", String.valueOf(pwdEditText.getText()));
+
+                    asyncHttpClient.get(Url.LOGIN_URL,requestParams,new AsyncHttpResponseHandler() {
+                        @Override
+                        public void onSuccess(int i, Header[] headers, byte[] bytes) {
+
+                        }
+
+                        @Override
+                        public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
+                            Toast.makeText(getActivity(),"请重试",Toast.LENGTH_LONG).show();
+
+                        }
+                    });
+                }
+            }
+        });
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_login, container, false);
+        return view;
+
+
     }
+    public void init(){
+
+    }
+//
+
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
@@ -75,6 +148,10 @@ public class LoginFragment extends Fragment {
         }
     }
 
+//    @OnClick(R.id.signinButton)
+//    public void signinButtononclick(){
+//
+//    }
 
 
     @Override
