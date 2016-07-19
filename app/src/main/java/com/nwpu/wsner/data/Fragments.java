@@ -5,7 +5,7 @@ import android.support.v4.app.Fragment;
 import com.nwpu.wsner.ui.fragments.FragmentAbout;
 import com.nwpu.wsner.ui.fragments.FragmentOne;
 import com.nwpu.wsner.ui.fragments.FragmentThree;
-import com.nwpu.wsner.ui.fragments.FragmentTwo;
+import com.nwpu.wsner.ui.fragments.FragmentManager;
 import com.nwpu.wsner.ui.fragments.LoginFragment;
 
 /**
@@ -14,7 +14,7 @@ import com.nwpu.wsner.ui.fragments.LoginFragment;
  */
 public enum Fragments {
 
-    TEST(FragmentOne.class), MANAGEMENT(FragmentTwo.class), FIND(FragmentThree.class), ABOUT(
+    TEST(FragmentOne.class), MANAGEMENT(FragmentManager.class), FIND(FragmentThree.class), ABOUT(
             FragmentAbout.class),LOGIN(LoginFragment.class);
 
     final Class<? extends Fragment> fragment;

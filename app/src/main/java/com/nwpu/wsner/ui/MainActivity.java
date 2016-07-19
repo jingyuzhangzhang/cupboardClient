@@ -1,6 +1,5 @@
 package com.nwpu.wsner.ui;
 
-import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -14,7 +13,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,8 +27,7 @@ import com.nwpu.wsner.data.model.NavigationDrawerItem;
 import com.nwpu.wsner.ui.fragments.FragmentAbout;
 import com.nwpu.wsner.ui.fragments.FragmentOne;
 import com.nwpu.wsner.ui.fragments.FragmentThree;
-import com.nwpu.wsner.ui.fragments.FragmentTwo;
-import com.nwpu.wsner.ui.fragments.LoginFragment;
+import com.nwpu.wsner.ui.fragments.FragmentManager;
 import com.nwpu.wsner.ui.navigationdrawer.NavigationDrawerView;
 import timber.log.Timber;
 
@@ -210,7 +207,7 @@ public class MainActivity extends ActionBarActivity {
                 }
                 break;
             case 1:
-                if (!(getSupportFragmentManager().getFragments().get(0) instanceof FragmentTwo)) {
+                if (!(getSupportFragmentManager().getFragments().get(0) instanceof FragmentManager)) {
                     getSupportFragmentManager().beginTransaction()
                             .replace(R.id.contentFrame, Fragment
                                     .instantiate(MainActivity.this, Fragments.MANAGEMENT.getFragment()))
