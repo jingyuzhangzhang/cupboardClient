@@ -3,7 +3,7 @@
 
     <color name="white">#ffffff</color>
     <color name="gray">#666666</color>
-
+    <color name="gray_shadow">#cccccc</color>
     <color name="grey_background">#eeeeee</color>
     <color name="black">#000000</color>
     <color name="background_user_navigation_drawer">#161F29</color>
@@ -28,8 +28,7 @@
     <color name="material_blue">#5677fc</color>
     <color name="basic_pink">#FF99CC</color>
     <color name="basic_blue">#CCCCFF</color>
-
-    <color name="gray_shadow">#cccccc</color>
     <color name="bacic_orange">#FFCCCC</color>
     <color name="lmy_purple">#CC9999</color>
+
 </resources>

@@ -1,14 +1,13 @@
 package com.nwpu.wsner.ui.fragments;
 
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -22,22 +21,41 @@ public class FragmentManager extends Fragment {
 
     @InjectView(R.id.circleLayout)
     LinearLayout circleLayout;
-    private Button btn;
     private Context mContext;
+    private ImageButton uvButton;
+    private ImageButton waterButton;
+    private ImageButton lotionButton;
+    private ImageButton essenceButton;
+    private ImageButton cleanButton;
+    private ImageButton maskButton;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup containter,
             Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_two, containter, false);
         ButterKnife.inject(this, view);
         mContext=getActivity();
-        ((GradientDrawable) circleLayout.getBackground())
-                .setColor(getResources().getColor(R.color.material_pink));
-        initView(view);
+//        ((GradientDrawable) circleLayout.getBackground())
+//                .setColor(getResources().getColor(R.color.material_pink));
+   //     initView(view);
         return view;
     }
     public void initView(View view){
-        btn=(Button)view.findViewById(R.id.scaner);
-        btn.setOnClickListener(mListener);
+//        btn=(Button)view.findViewById(R.id.scaner);
+//        btn.setOnClickListener(mListener);
+        uvButton=(ImageButton)view.findViewById(R.id.uvprotect);
+        waterButton=(ImageButton)view.findViewById(R.id.water);
+        lotionButton=(ImageButton)view.findViewById(R.id.lotion);
+        essenceButton=(ImageButton)view.findViewById(R.id.essence);
+        cleanButton=(ImageButton)view.findViewById(R.id.clean);
+        maskButton=(ImageButton)view.findViewById(R.id.mask);
+
+        uvButton.setOnClickListener(mListener);
+        waterButton.setOnClickListener(mListener);
+        lotionButton.setOnClickListener(mListener);
+        essenceButton.setOnClickListener(mListener);
+        cleanButton.setOnClickListener(mListener);
+        maskButton.setOnClickListener(mListener);
+
     }
 
     @Override
@@ -59,9 +77,13 @@ public class FragmentManager extends Fragment {
     public void onClick(View v) {
 
         switch (v.getId()){
-            case R.id.scaner:
-            startActivity(new Intent(mContext, CaptureActivity.class));
-                break;
+//            case R.id.scaner:
+//            startActivity(new Intent(mContext, CaptureActivity.class));
+//                break;
+
+             
+
+
         }
     }
 };
