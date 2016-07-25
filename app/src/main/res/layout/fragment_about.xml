@@ -6,7 +6,8 @@
     <LinearLayout
             style="@style/LinearLayout"
             android:id="@+id/fragmentAbout"
-            android:padding="@dimen/default_padding">
+            android:padding="@dimen/default_padding"
+            android:background="@color/bg_yellow">
 
         <com.devspark.robototextview.widget.RobotoTextView
                 style="@style/Wrap"

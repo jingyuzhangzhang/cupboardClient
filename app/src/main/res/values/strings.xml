@@ -18,8 +18,8 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <string name="user_name">Michal Bialas</string>
-    <string name="user_email">mmbialas@gmail.com</string>
+    <string name="user_name">个人中心</string>
+    <string name="user_email">WSN小分队</string>
 
     <string name="content_description">image view</string>
 
@@ -42,4 +42,16 @@
 
     <!-- LMY‘s-->
     <string name="scan_tips">将二维码图片对准扫描框即可自动扫描</string>
+
+    <!-- WMF Dialog-->
+    <string name="date_picker_title">选择日期：</string>
+
+    <style name="my_actionbar_style" parent="@android:style/Widget.Holo.Light.ActionBar">
+        <item name="android:background">#647b97</item>
+        <item name="android:titleTextStyle">@style/AcBar_titleStyle</item>
+    </style>
+    <style name="AcBar_titleStyle">
+
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
 </resources>

@@ -1,13 +1,16 @@
 package com.nwpu.wsner.lib;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.res.AssetFileDescriptor;
 import android.graphics.Point;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
@@ -28,17 +31,22 @@ import com.nwpu.wsner.R;
 import com.nwpu.wsner.lib.camera.CameraManager;
 import com.nwpu.wsner.lib.decode.CaptureActivityHandler;
 import com.nwpu.wsner.lib.decode.InactivityTimer;
+import com.nwpu.wsner.ui.fragments.DatePickerFragment;
+import com.nwpu.wsner.ui.fragments.FragmentAbout;
+import com.nwpu.wsner.ui.fragments.FragmentManager;
 
 
 import java.io.IOException;
 import java.util.Date;
 
+
 import cz.msebera.android.httpclient.Header;
 
 
-public class CaptureActivity extends Activity implements Callback {
+public class CaptureActivity extends Activity implements Callback,DatePickerFragment.Resultcallback {
 
-	private CaptureActivityHandler handler;
+
+    private CaptureActivityHandler handler;
 	private boolean hasSurface;
 	private InactivityTimer inactivityTimer;
 	private MediaPlayer mediaPlayer;
@@ -52,7 +60,8 @@ public class CaptureActivity extends Activity implements Callback {
 	private RelativeLayout mContainer = null;
 	private RelativeLayout mCropLayout = null;
 	private boolean isNeedCapture = false;
-	
+    private static final String DIALOG_DATE = "date";
+
 	public boolean isNeedCapture() {
 		return isNeedCapture;
 	}
@@ -115,6 +124,8 @@ public class CaptureActivity extends Activity implements Callback {
 		mAnimation.setRepeatMode(Animation.REVERSE);
 		mAnimation.setInterpolator(new LinearInterpolator());
 		mQrLineView.setAnimation(mAnimation);
+
+        handleDecode(null);
 	}
 
 	boolean flag = true;
@@ -169,14 +180,23 @@ public class CaptureActivity extends Activity implements Callback {
 		super.onDestroy();
 	}
 
-	public void handleDecode(String result) {
+	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
+    public void handleDecode(String result) {
 		inactivityTimer.onActivity();
 		playBeepSoundAndVibrate();
 	//LMY 20160725
-		
+        android.app.FragmentManager fm = getFragmentManager();
+        DatePickerFragment dialog = new DatePickerFragment();
 
+        dialog.show(fm, DIALOG_DATE);
 
 	}
+
+
+
+
+
+
 
 //	private AlertDialog.Builder setPositiveButton(AlertDialog.Builder builder)
 //	{
@@ -281,4 +301,9 @@ public class CaptureActivity extends Activity implements Callback {
 			mediaPlayer.seekTo(0);
 		}
 	};
+
+    @Override
+    public void onResult(Date mDate) {
+
+    }
 }

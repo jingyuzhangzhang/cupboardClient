@@ -3,7 +3,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 style="@style/Match"
-                android:id="@+id/fragmentOne">
+                android:id="@+id/fragmentOne"
+                android:background="@color/bg_yellow">
 
     <LinearLayout
             android:id="@+id/circleLayout"
