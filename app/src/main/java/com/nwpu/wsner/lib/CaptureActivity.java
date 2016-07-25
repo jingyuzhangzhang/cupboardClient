@@ -172,39 +172,8 @@ public class CaptureActivity extends Activity implements Callback {
 	public void handleDecode(String result) {
 		inactivityTimer.onActivity();
 		playBeepSoundAndVibrate();
-		System.out.println(result);
-		//Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
-		//add
-		AlertDialog.Builder builder =  new AlertDialog.Builder(this)
-				.setTitle("scan result")
-				.setMessage(result)
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        //TODO
-                        AsyncHttpClient client = new AsyncHttpClient();
-                        RequestParams params = new RequestParams();
-                        params.put("cell_phone_id","hello");
-                        params.put("IMEI","123456789");
-                        Long tmpTime ;
-                        tmpTime = new Date().getTime();
-                        params.put("time",tmpTime.toString());
-                        client.get("http://10.13.32.237:8000/cost/", params, new AsyncHttpResponseHandler() {
-                            @Override
-                            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                                Toast.makeText(getApplicationContext(), "submit success", Toast.LENGTH_SHORT).show();
-                            }
-
-                            @Override
-                            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                                Toast.makeText(getApplicationContext(), "submit failed", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                        // 连续扫描，不发送此消息扫描一次结束后就不能再次扫描
-                        handler.sendEmptyMessage(R.id.restart_preview);
-                    }
-                });
-        builder.create().show();
+	//LMY 20160725
+		
 
 
 	}
