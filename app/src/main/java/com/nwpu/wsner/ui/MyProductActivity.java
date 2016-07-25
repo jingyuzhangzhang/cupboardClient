@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -21,7 +22,7 @@ import java.util.List;
 /**
  * Created by lmy on 16/7/22.
  */
-public class MyProductActivity extends Activity{
+public class MyProductActivity extends ActionBarActivity {
     private Cursor cursor =null;
     private  product_tb firstData=null;
    public void onCreate(Bundle saveInstanceState){
@@ -49,6 +50,8 @@ public class MyProductActivity extends Activity{
        listView.setAdapter(myCursorAdapter);
 
 
+
+       getSupportActionBar().setIcon(R.drawable.ic_launcher);
 
     }
 
