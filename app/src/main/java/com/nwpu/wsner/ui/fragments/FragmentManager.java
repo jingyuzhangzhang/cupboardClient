@@ -1,6 +1,7 @@
 package com.nwpu.wsner.ui.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import com.nwpu.wsner.R;
 import com.nwpu.wsner.lib.CaptureActivity;
+import com.nwpu.wsner.ui.MyProductActivity;
 
 /**
  * Created by Michal Bialas on 19/07/14.
@@ -36,7 +38,7 @@ public class FragmentManager extends Fragment {
         mContext=getActivity();
 //        ((GradientDrawable) circleLayout.getBackground())
 //                .setColor(getResources().getColor(R.color.material_pink));
-   //     initView(view);
+        initView(view);
         return view;
     }
     public void initView(View view){
@@ -76,15 +78,15 @@ public class FragmentManager extends Fragment {
     @Override
     public void onClick(View v) {
 
-        switch (v.getId()){
-//            case R.id.scaner:
-//            startActivity(new Intent(mContext, CaptureActivity.class));
+        Intent intent =new Intent(mContext,MyProductActivity.class);
+        intent.putExtra("type",v.getId());
+        startActivity(intent);
+//        switch (v.getId()){
+////            case R.id.scaner:
+////            startActivity(new Intent(mContext, CaptureActivity.class));
 //                break;
 
-             
 
-
-        }
     }
 };
 
