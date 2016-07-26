@@ -81,6 +81,7 @@ public class FragmentManager extends Fragment {
         Intent intent =new Intent(mContext,MyProductActivity.class);
         intent.putExtra("type",v.getId());
         startActivity(intent);
+
 //        switch (v.getId()){
 ////            case R.id.scaner:
 ////            startActivity(new Intent(mContext, CaptureActivity.class));

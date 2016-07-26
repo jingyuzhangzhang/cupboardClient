@@ -29,7 +29,8 @@
         <activity android:name=".lib.CaptureActivity"
             android:label="@string/app_name"
             />
-        <activity android:name=".ui.MyProductActivity"/>
+        <activity android:name=".ui.MyProductActivity"
+            />
     </application>
 
 </manifest>
