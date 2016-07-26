@@ -20,16 +20,15 @@ import org.litepal.crud.DataSupport;
  */
 public class MyProductActivity extends ActionBarActivity {
     private Cursor cursor =null;
-    private  product_tb firstData=null;
+
    public void onCreate(Bundle saveInstanceState){
        super.onCreate(saveInstanceState);
        setContentView(R.layout.mylist);
        Intent intent=getIntent();
        String type=intent.getStringExtra("type");
-       // 根据type查询不同的表，把表中的值存到cursor，传到Adapter中（this, Cursor c, true），把ListView setAdapter。
-       firstData=new product_tb("123","123","123","123","123","123");
-       firstData.save();
-       cursor = DataSupport.findBySQL("select product_name,id as _id from product_tb where product_type=?","123");
+       // 根据type查询不同的表，把表中的值存到cursor，传到Adapter中（this, Cursor c, true），把ListView setAdapter.
+       // 需要显示的信息，名称，生产日期，功效，二维码
+       cursor = DataSupport.findBySQL("select product_name,product_function,product_barcode,product_date,id as _id from product_tb where product_type=?",type);
 
     final ListView listView = (ListView)findViewById(R.id.mylist);
 

@@ -15,7 +15,9 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.ButterKnife;
@@ -26,11 +28,16 @@ import com.nwpu.wsner.R;
 import com.nwpu.wsner.data.Fragments;
 import com.nwpu.wsner.data.model.NavigationDrawerItem;
 import com.nwpu.wsner.lib.CaptureActivity;
+import com.nwpu.wsner.model.product_tb;
 import com.nwpu.wsner.ui.fragments.FragmentAbout;
 import com.nwpu.wsner.ui.fragments.FragmentOne;
 import com.nwpu.wsner.ui.fragments.FragmentThree;
 import com.nwpu.wsner.ui.fragments.FragmentManager;
 import com.nwpu.wsner.ui.navigationdrawer.NavigationDrawerView;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import timber.log.Timber;
 
 /**
@@ -43,7 +50,7 @@ import timber.log.Timber;
 public class MainActivity extends ActionBarActivity {
 
     private static final String STATE_SELECTED_POSITION = "selected_navigation_drawer_position";
-
+    private product_tb productData=null;
     private int currentSelectedPosition = 0;
 
     @InjectView(R.id.navigationDrawerListViewWrapper)
@@ -159,12 +166,47 @@ public class MainActivity extends ActionBarActivity {
         } else if (item.getItemId() == R.id.action_settings) {
 
             Intent intent =new Intent(this,CaptureActivity.class);
-            startActivity(intent);
+            startActivityForResult(intent, 0);
+
+//            startActivity(intent);
 
         }
         return super.onOptionsItemSelected(item);
     }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        String product_barcode;
+        String product_name;
+        String product_date;
+        String product_valid;
+        String product_function;
+        String product_type;
+        String formatType="yyyy-MM-dd";
+        if(resultCode==RESULT_OK){
+            try {
+                //"productBarcode":"49325263","productName":"药用面霜","productionDate":1469462400000,"productionValid":1500998400000,"productFunction":null,"productType":"霜","productNumber":3,"skinAvailability":null,"username":"sun"}}
+                JSONObject json1=new JSONObject(data.getStringExtra("jsonData"));
+                JSONObject jsonObject = new JSONObject(json1.getString("product"));
+                product_barcode=jsonObject.getString("productBarcode");
+                product_name=jsonObject.getString("productName");
 
+                Date date = new Date(jsonObject.getLong("productionDate"));
+                product_date= new SimpleDateFormat(formatType).format(date);
+
+                product_valid=jsonObject.getString("productionValid");
+                product_function=jsonObject.getString("productFunction");
+                product_type=jsonObject.getString("productType");
+
+                productData=new product_tb(product_barcode,product_name,product_date,"3年",product_function,product_type);
+                productData.save();
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        }
+        //    System.out.print(data.getStringExtra("jsonData"));
+    }
     @OnItemClick(R.id.leftDrawerListView)
     public void OnItemClick(int position, long id) {
         if (mDrawerLayout.isDrawerOpen(mLinearDrawerLayout)) {

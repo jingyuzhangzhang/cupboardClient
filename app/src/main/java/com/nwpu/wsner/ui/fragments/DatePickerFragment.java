@@ -14,6 +14,7 @@ import android.widget.DatePicker;
 
 import com.nwpu.wsner.R;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -26,7 +27,7 @@ import java.util.GregorianCalendar;
 public class DatePickerFragment extends DialogFragment {
 
     public static final String EXTRA_DATE = "com.nwpu.wsner.cupboardClient.date";
-    private Date mDate;
+    private Date mDate=null;
     private Resultcallback mResultcallback;
     @Override
     public void onAttach(Activity activity){

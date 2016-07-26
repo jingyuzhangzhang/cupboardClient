@@ -4,7 +4,9 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
 import android.graphics.Point;
 import android.media.AudioManager;
@@ -14,6 +16,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
+import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceHolder.Callback;
 import android.view.SurfaceView;
@@ -27,6 +30,7 @@ import android.widget.Toast;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+import com.loopj.android.http.TextHttpResponseHandler;
 import com.nwpu.wsner.R;
 import com.nwpu.wsner.constants.Url;
 import com.nwpu.wsner.lib.camera.CameraManager;
@@ -37,6 +41,7 @@ import com.nwpu.wsner.ui.fragments.DatePickerFragment;
 
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
@@ -62,6 +67,9 @@ public class CaptureActivity extends Activity implements Callback,DatePickerFrag
 	private boolean isNeedCapture = false;
     private static final String DIALOG_DATE = "date";
 	private String mResult;
+	private String mUrl;
+
+	private Context mContext;
 	public boolean isNeedCapture() {
 		return isNeedCapture;
 	}
@@ -106,7 +114,7 @@ public class CaptureActivity extends Activity implements Callback,DatePickerFrag
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
+		mContext=this;
 		setContentView(R.layout.activity_qr_scan);
 		// 初始化 CameraManager
 		CameraManager.init(getApplication());
@@ -176,6 +184,7 @@ public class CaptureActivity extends Activity implements Callback,DatePickerFrag
 
 	@Override
 	protected void onDestroy() {
+
 		inactivityTimer.shutdown();
 		super.onDestroy();
 	}
@@ -306,9 +315,36 @@ public class CaptureActivity extends Activity implements Callback,DatePickerFrag
 
     @Override
     public void onResult(Date mDate) {
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		String date=format.format(mDate);
+        mUrl=Url.addProdcutUrl(mResult,date,"sun");
+		AsyncHttpClient client = new AsyncHttpClient();
+		client.get(mUrl, new TextHttpResponseHandler() {
+			@Override
+			public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
 
-		Url.addProdcutUrl(mResult, mResult, "sun");
+			}
 
+			@Override
+			public void onSuccess(int statusCode, Header[] headers, String responseString) {
+
+
+					Intent intent=new Intent();
+					intent.putExtra("jsonData",responseString);
+					setResult(RESULT_OK, intent);
+					Log.v("httpdata",responseString);
+
+					finish();
+
+
+			}
+		});
+//		addProductHttp(Url.addProdcutUrl(mResult, mResult, "sun"));
+//       Toast.makeText(CaptureActivity.this,"生产日期"+mResult,Toast.LENGTH_LONG).show();
 
 	}
+//	private void addProductHttp(String mUrl){
+//
+//
+//	}
 }
