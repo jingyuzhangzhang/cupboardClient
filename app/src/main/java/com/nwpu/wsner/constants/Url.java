@@ -12,4 +12,13 @@ public class Url {
     public static final String SIGIN_URL=BASE_URL+"";
     public static final String WETHER_URL="http://php.weather.sina.com.cn/xml.php?city=%CE%F7%B0%B2&password=DJOYnieT8234jlsK&day=0";
 
+    private static final String PRODUCT_ADD_URL = "http://localhost:8088/SmartCabinet/product/productScan?";
+
+    /**
+     添加物品 * http://ip:port/SmartCabinet/product?barcode=xx&productionDate=xx&productionValid=xxx&username=xxx
+     */
+    public static String addProdcutUrl(String barcode,String productionDate,String username ) {
+        return PRODUCT_ADD_URL + "barcode=" + barcode + "productionDate=" + productionDate + "username=" + username;
+    }
+
 }

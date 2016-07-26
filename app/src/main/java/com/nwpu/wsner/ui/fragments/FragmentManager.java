@@ -80,12 +80,6 @@ public class FragmentManager extends Fragment {
         intent.putExtra("type",v.getId());
         startActivity(intent);
 
-//        switch (v.getId()){
-////            case R.id.scaner:
-////            startActivity(new Intent(mContext, CaptureActivity.class));
-//                break;
-
-
     }
 };
 

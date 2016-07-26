@@ -28,10 +28,10 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.nwpu.wsner.R;
+import com.nwpu.wsner.constants.Url;
 import com.nwpu.wsner.lib.camera.CameraManager;
 import com.nwpu.wsner.lib.decode.CaptureActivityHandler;
 import com.nwpu.wsner.lib.decode.InactivityTimer;
-import com.nwpu.wsner.ui.UrlUtil;
 import com.nwpu.wsner.ui.fragments.DatePickerFragment;
 
 
@@ -307,8 +307,8 @@ public class CaptureActivity extends Activity implements Callback,DatePickerFrag
     @Override
     public void onResult(Date mDate) {
 
-		UrlUtil.addProdcutUrl(mResult,mResult,"sun");
-		
+		Url.addProdcutUrl(mResult, mResult, "sun");
+
 
 	}
 }
