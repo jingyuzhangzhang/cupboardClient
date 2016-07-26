@@ -31,9 +31,9 @@ import com.nwpu.wsner.R;
 import com.nwpu.wsner.lib.camera.CameraManager;
 import com.nwpu.wsner.lib.decode.CaptureActivityHandler;
 import com.nwpu.wsner.lib.decode.InactivityTimer;
+import com.nwpu.wsner.ui.UrlUtil;
 import com.nwpu.wsner.ui.fragments.DatePickerFragment;
-import com.nwpu.wsner.ui.fragments.FragmentAbout;
-import com.nwpu.wsner.ui.fragments.FragmentManager;
+
 
 
 import java.io.IOException;
@@ -61,7 +61,7 @@ public class CaptureActivity extends Activity implements Callback,DatePickerFrag
 	private RelativeLayout mCropLayout = null;
 	private boolean isNeedCapture = false;
     private static final String DIALOG_DATE = "date";
-
+	private String mResult;
 	public boolean isNeedCapture() {
 		return isNeedCapture;
 	}
@@ -185,11 +185,13 @@ public class CaptureActivity extends Activity implements Callback,DatePickerFrag
 		inactivityTimer.onActivity();
 		playBeepSoundAndVibrate();
 	//LMY 20160725
-        android.app.FragmentManager fm = getFragmentManager();
-        DatePickerFragment dialog = new DatePickerFragment();
-
-        dialog.show(fm, DIALOG_DATE);
-
+		if(result!=null) {
+			Toast.makeText(CaptureActivity.this,"扫码成功",Toast.LENGTH_SHORT).show();
+			mResult=result;
+			android.app.FragmentManager fm = getFragmentManager();
+			DatePickerFragment dialog = new DatePickerFragment();
+			dialog.show(fm, DIALOG_DATE);
+		}
 	}
 
 
@@ -305,5 +307,8 @@ public class CaptureActivity extends Activity implements Callback,DatePickerFrag
     @Override
     public void onResult(Date mDate) {
 
-    }
+		UrlUtil.addProdcutUrl(mResult,mResult,"sun");
+		
+
+	}
 }

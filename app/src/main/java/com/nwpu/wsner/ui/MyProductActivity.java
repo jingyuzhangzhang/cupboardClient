@@ -33,9 +33,11 @@ public class MyProductActivity extends ActionBarActivity {
        // 根据type查询不同的表，把表中的值存到cursor，传到Adapter中（this, Cursor c, true），把ListView setAdapter。
        firstData=new product_tb("123","123","123","123","123","123");
        firstData.save();
-        cursor = DataSupport.findBySQL("select product_name,id as _id from product_tb where product_type=?","123");
+       cursor = DataSupport.findBySQL("select product_name,id as _id from product_tb where product_type=?","123");
 
     final ListView listView = (ListView)findViewById(R.id.mylist);
+
+       //长按删除
        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
            @Override
            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
@@ -48,8 +50,6 @@ public class MyProductActivity extends ActionBarActivity {
        });
        MyCursorAdapter myCursorAdapter = new MyCursorAdapter(this,cursor);
        listView.setAdapter(myCursorAdapter);
-
-
 
        getSupportActionBar().setIcon(R.drawable.ic_launcher);
 
