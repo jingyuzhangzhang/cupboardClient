@@ -4,7 +4,7 @@ package com.nwpu.wsner.constants;
  * Created by zjy on 16/7/18.
  */
 public class Url {
-    private static final String IP_PORT="";
+    private static final String IP_PORT="http://10.13.33.91:8080/";
     private static final String BASE_URL=IP_PORT+"";
 
 

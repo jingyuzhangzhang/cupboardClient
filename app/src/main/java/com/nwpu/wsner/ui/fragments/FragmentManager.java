@@ -7,14 +7,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import com.nwpu.wsner.R;
-import com.nwpu.wsner.lib.CaptureActivity;
-import com.nwpu.wsner.ui.MyProductActivity;
+import com.nwpu.wsner.ui.activities.MyProductActivity;
 
 /**
  * Created by Michal Bialas on 19/07/14.

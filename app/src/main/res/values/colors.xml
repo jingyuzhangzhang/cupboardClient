@@ -30,5 +30,7 @@
     <color name="basic_blue">#CCCCFF</color>
     <color name="bacic_orange">#FFCCCC</color>
     <color name="lmy_purple">#CC9999</color>
+    <color name="bg_yellow">#CC9999</color>
+
 
 </resources>
