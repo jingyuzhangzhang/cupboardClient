@@ -52,6 +52,6 @@
     </style>
     <style name="AcBar_titleStyle">
 
-        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textColor">#FFCCCC</item>
     </style>
 </resources>

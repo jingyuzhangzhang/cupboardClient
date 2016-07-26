@@ -1,6 +1,7 @@
 package com.nwpu.wsner.ui;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -38,11 +39,22 @@ public class MyProductActivity extends ActionBarActivity {
     final ListView listView = (ListView)findViewById(R.id.mylist);
        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
            @Override
-           public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-               int index=position;
-               TextView textView=(TextView)view.findViewById(R.id.product_name);
-               String del_data =textView.getText().toString();
-               Toast.makeText(MyProductActivity.this, del_data, Toast.LENGTH_SHORT).show();
+           public boolean onItemLongClick(AdapterView<?> parent, final View view, final int position, long id) {
+               new AlertDialog.Builder(MyProductActivity.this).setTitle("确定删除该物品？").setPositiveButton("是", new DialogInterface.OnClickListener() {
+                   @Override
+                   public void onClick(DialogInterface dialog, int which) {
+                       //删除Item
+
+                        Toast.makeText(MyProductActivity.this, "成功删除该物品", Toast.LENGTH_SHORT).show();
+                       //删除数据库里的物品
+                   }
+               }).setNegativeButton("返回", null).show();
+
+
+//               int index=position;
+//               TextView textView=(TextView)view.findViewById(R.id.product_name);
+//               String del_data =textView.getText().toString();
+//               Toast.makeText(MyProductActivity.this, del_data, Toast.LENGTH_SHORT).show();
                return false;
            }
        });
