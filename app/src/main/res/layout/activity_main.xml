@@ -7,7 +7,7 @@
             android:id="@+id/contentFrame"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/bg_yellow">
+        android:background="@color/bg_yellow">
     </FrameLayout>
 
     <LinearLayout
@@ -21,7 +21,8 @@
         <RelativeLayout
                 android:id="@+id/userDrawerHeader"
                 android:layout_width="@dimen/navigation_drawer_width"
-                android:layout_height="@dimen/navigation_drawer_personal_data_layout_height">
+                android:layout_height="@dimen/navigation_drawer_personal_data_layout_height"
+              >
 
             <ImageView
                     android:id="@+id/drawerUserImage"
