@@ -1,4 +1,4 @@
-package com.nwpu.wsner.ui;
+package com.nwpu.wsner.constants;
 
 /**
  * URL static constants Util Class used for Http Request

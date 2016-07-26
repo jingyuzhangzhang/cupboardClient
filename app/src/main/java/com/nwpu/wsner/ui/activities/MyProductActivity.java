@@ -1,12 +1,9 @@
-package com.nwpu.wsner.ui;
+package com.nwpu.wsner.ui.activities;
 
-import android.app.Activity;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -18,7 +15,6 @@ import com.nwpu.wsner.model.product_tb;
 
 import org.litepal.crud.DataSupport;
 
-import java.util.List;
 /**
  * Created by lmy on 16/7/22.
  */
