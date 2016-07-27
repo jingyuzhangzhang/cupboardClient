@@ -1,4 +1,20 @@
-package com.nwpu.wsner.ui.services;
+/*
+ * Copyright (C) 2013 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.example.android.bluetoothlegatt;
 
 import android.annotation.TargetApi;
 import android.app.Service;
@@ -16,22 +32,18 @@ import android.content.Intent;
 import android.os.Binder;
 import android.os.Build;
 import android.os.IBinder;
-import android.support.annotation.Nullable;
 import android.util.Log;
-
-import com.nwpu.wsner.constants.GattInfo;
-import com.nwpu.wsner.constants.SampleGattAttributes;
 
 import java.util.List;
 import java.util.UUID;
 
 /**
- * Created by zjy on 16/7/25.
+ * Service for managing connection and data communication with a GATT server hosted on a
+ * given Bluetooth LE device.
  */
 @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
-public class BluetoothleService extends Service{
-
-    private final static String TAG = BluetoothleService.class.getSimpleName();
+public class BluetoothLeService extends Service {
+    private final static String TAG = BluetoothLeService.class.getSimpleName();
 
     private BluetoothManager mBluetoothManager;
     private BluetoothAdapter mBluetoothAdapter;
@@ -56,16 +68,12 @@ public class BluetoothleService extends Service{
 
     public final static UUID UUID_HEART_RATE_MEASUREMENT =
             UUID.fromString(SampleGattAttributes.HEART_RATE_MEASUREMENT);
-    public final static String EXTRA_UUID=
-            "com.example.bluetooth.le.EXTRA_UUID";
-
 
     // Implements callback methods for GATT events that the app cares about.  For example,
     // connection change and services discovered.
     private final BluetoothGattCallback mGattCallback = new BluetoothGattCallback() {
         @Override
         public void onConnectionStateChange(BluetoothGatt gatt, int status, int newState) {
-            Log.e("test","onConnectionStateChange****status"+status+"**newState**"+newState);
             String intentAction;
             if (newState == BluetoothProfile.STATE_CONNECTED) {
                 intentAction = ACTION_GATT_CONNECTED;
@@ -105,21 +113,17 @@ public class BluetoothleService extends Service{
         @Override
         public void onCharacteristicChanged(BluetoothGatt gatt,
                                             BluetoothGattCharacteristic characteristic) {
-            Log.e("test","onCharacteristicChanged");
             broadcastUpdate(ACTION_DATA_AVAILABLE, characteristic);
         }
     };
 
     private void broadcastUpdate(final String action) {
-        Log.e("test","broadcastUpdate");
-
         final Intent intent = new Intent(action);
         sendBroadcast(intent);
     }
 
     private void broadcastUpdate(final String action,
                                  final BluetoothGattCharacteristic characteristic) {
-        Log.e("test","broadcastUpdate***action***"+action+"**********"+"BluetoothGattCharacteristic characteristic******"+characteristic);
         final Intent intent = new Intent(action);
 
         // This is special handling for the Heart Rate Measurement profile.  Data parsing is
@@ -138,7 +142,6 @@ public class BluetoothleService extends Service{
             final int heartRate = characteristic.getIntValue(format, 1);
             Log.d(TAG, String.format("Received heart rate: %d", heartRate));
             intent.putExtra(EXTRA_DATA, String.valueOf(heartRate));
-            intent.putExtra(EXTRA_UUID,characteristic.getUuid().toString());
         } else {
             // For all other profiles, writes the data formatted in HEX.
             final byte[] data = characteristic.getValue();
@@ -147,15 +150,14 @@ public class BluetoothleService extends Service{
                 for(byte byteChar : data)
                     stringBuilder.append(String.format("%02X ", byteChar));
                 intent.putExtra(EXTRA_DATA, new String(data) + "\n" + stringBuilder.toString());
-                intent.putExtra(EXTRA_UUID,characteristic.getUuid().toString());
             }
         }
         sendBroadcast(intent);
     }
 
     public class LocalBinder extends Binder {
-        public BluetoothleService getService() {
-            return BluetoothleService.this;
+        BluetoothLeService getService() {
+            return BluetoothLeService.this;
         }
     }
 
@@ -300,7 +302,7 @@ public class BluetoothleService extends Service{
         // This is specific to Heart Rate Measurement.
         if (UUID_HEART_RATE_MEASUREMENT.equals(characteristic.getUuid())) {
             BluetoothGattDescriptor descriptor = characteristic.getDescriptor(
-                    GattInfo.CLIENT_CHARACTERISTIC_CONFIG);
+                    UUID.fromString(SampleGattAttributes.CLIENT_CHARACTERISTIC_CONFIG));
             descriptor.setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);
             mBluetoothGatt.writeDescriptor(descriptor);
         }

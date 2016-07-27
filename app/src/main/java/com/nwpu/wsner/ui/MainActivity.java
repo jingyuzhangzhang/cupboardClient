@@ -7,6 +7,7 @@ import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,6 +25,8 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 import butterknife.OnItemClick;
+
+import com.example.android.bluetoothlegatt.DeviceScanActivity;
 import com.nwpu.wsner.R;
 import com.nwpu.wsner.data.Fragments;
 import com.nwpu.wsner.data.model.NavigationDrawerItem;
@@ -91,7 +94,7 @@ public class MainActivity extends ActionBarActivity {
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().add(R.id.contentFrame,
-                    Fragment.instantiate(MainActivity.this, Fragments.TEST.getFragment())).commit();
+                    Fragment.instantiate(MainActivity.this, Fragments.MANAGEMENT.getFragment())).commit();
         } else {
             currentSelectedPosition = savedInstanceState.getInt(STATE_SELECTED_POSITION);
         }
@@ -245,6 +248,9 @@ public class MainActivity extends ActionBarActivity {
     private void onNavigationDrawerItemSelected(int position) {
         switch (position) {
             case 0:
+//                Intent i = new Intent(MainActivity.this,DeviceScanActivity.class);
+//                i.setClass(MainActivity.this, DeviceScanActivity.class);
+//                MainActivity.this.startActivity(i);
                 if (!(getSupportFragmentManager().getFragments()
                         .get(0) instanceof FragmentOne)) {
                     getSupportFragmentManager().beginTransaction()

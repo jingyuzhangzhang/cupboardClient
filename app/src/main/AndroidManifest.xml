@@ -34,8 +34,12 @@
             android:launchMode="singleTop"
             android:label="@string/app_name"
             />
+        <activity android:name="com.example.android.bluetoothlegatt.DeviceControlActivity"
+            android:theme="@android:style/Theme.Holo.Light"/>
+        <activity android:name="com.example.android.bluetoothlegatt.DeviceScanActivity"
+            android:theme="@android:style/Theme.Holo.Light"/>
         <activity android:name=".ui.activities.MyProductActivity"/>
-        <service android:name=".ui.services.BluetoothleService"
+        <service android:name="com.example.android.bluetoothlegatt.BluetoothLeService"
             android:enabled="true"/>
     </application>
 
