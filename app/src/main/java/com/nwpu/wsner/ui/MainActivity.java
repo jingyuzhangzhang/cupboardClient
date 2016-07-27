@@ -2,6 +2,7 @@ package com.nwpu.wsner.ui;
 
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
@@ -14,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -37,6 +39,7 @@ import com.nwpu.wsner.ui.navigationdrawer.NavigationDrawerView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.litepal.crud.DataSupport;
 
 import timber.log.Timber;
 
@@ -189,16 +192,27 @@ public class MainActivity extends ActionBarActivity {
                 JSONObject jsonObject = new JSONObject(json1.getString("product"));
                 product_barcode=jsonObject.getString("productBarcode");
                 product_name=jsonObject.getString("productName");
-
                 Date date = new Date(jsonObject.getLong("productionDate"));
                 product_date= new SimpleDateFormat(formatType).format(date);
-
                 product_valid=jsonObject.getString("productionValid");
                 product_function=jsonObject.getString("productFunction");
                 product_type=jsonObject.getString("productType");
+                Cursor  cursor = DataSupport.findBySQL("select id as _id from product_tb where product_barcode=?", product_barcode);
 
-                productData=new product_tb(product_barcode,product_name,product_date,"3年",product_function,product_type);
-                productData.save();
+                Toast.makeText(MainActivity.this,"成功添加该护肤品",Toast.LENGTH_LONG).show();
+                //判断数据库是否有相同数据
+                if(cursor.moveToFirst()){
+
+                    Toast.makeText(MainActivity.this,"已有该护肤品",Toast.LENGTH_LONG).show();
+                }
+                else
+                {
+                    productData=new product_tb(product_barcode,product_name,product_date,"3年",product_function,product_type);
+                    productData.save();
+                    Toast.makeText(MainActivity.this,"成功添加该护肤品",Toast.LENGTH_LONG).show();
+
+                }
+
 
             } catch (JSONException e) {
                 e.printStackTrace();

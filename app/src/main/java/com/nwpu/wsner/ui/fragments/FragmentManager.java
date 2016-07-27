@@ -77,9 +77,23 @@ public class FragmentManager extends Fragment {
     public void onClick(View v) {
 
         Intent intent =new Intent(mContext,MyProductActivity.class);
-        intent.putExtra("type",v.getId());
-        startActivity(intent);
 
+        switch(v.getId()) {
+            case R.id.clean:intent.putExtra("type", "clean");
+                break;
+            case R.id.water:intent.putExtra("type", "water");
+                break;
+            case R.id.essence:intent.putExtra("type", "essence");
+                break;
+            case R.id.lotion:intent.putExtra("type", "lotion");
+                break;
+            case R.id.uvprotect:intent.putExtra("type","uvprotect");
+                break;
+            case R.id.mask:intent.putExtra("tyoe","mask");
+                break;
+
+        }
+        startActivity(intent);
     }
 };
 
