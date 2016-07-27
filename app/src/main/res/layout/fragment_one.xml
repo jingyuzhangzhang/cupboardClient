@@ -7,15 +7,27 @@
                 android:background="@color/bg_yellow">
 
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Button"
-        android:id="@+id/GATTbutton"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="84dp"
-        android:layout_marginStart="84dp"
-        android:layout_marginTop="67dp" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background1">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:layout_marginBottom="20sp">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ScanButton"
+                android:id="@+id/GATTbutton"
+                android:layout_gravity="bottom|center_horizontal" />
+        </LinearLayout>
+
+    </LinearLayout>
+
 </RelativeLayout>
