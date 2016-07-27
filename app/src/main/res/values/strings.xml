@@ -73,6 +73,8 @@
     <string name="str_dialog_title">正在测试</string>
     <string name="str_dialog_body">请稍等</string>
     <string name="ScanButton">搜索设备</string>
+    <string name="dry">干燥</string>
+    <string name="moist">水润</string>
 
     <style name="my_actionbar_style" parent="@android:style/Widget.Holo.Light.ActionBar">
         <item name="android:background">#647b97</item>
