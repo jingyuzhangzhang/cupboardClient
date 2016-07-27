@@ -89,10 +89,28 @@
             android:text="@string/BeginTestButton"
             android:id="@+id/BeginTestButton" />
     </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
 
+    <LinearLayout android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp">
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/dry"
+            android:inputType="none" />
+
+        <ProgressBar
+            android:layout_width="fill_parent"
+            android:layout_height="15sp"
+            android:background="@drawable/icon_skin_process_bg"/>
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/moist"
+            android:inputType="none" />
     </LinearLayout>
     <!--<ExpandableListView android:id="@+id/gatt_services_list"-->
             <!--android:layout_width="match_parent"-->
