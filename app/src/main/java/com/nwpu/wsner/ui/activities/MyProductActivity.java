@@ -20,7 +20,7 @@ import org.litepal.crud.DataSupport;
  */
 public class MyProductActivity extends ActionBarActivity {
     private Cursor cursor =null;
-
+    private MyCursorAdapter myCursorAdapter;
    public void onCreate(Bundle saveInstanceState){
        super.onCreate(saveInstanceState);
        setContentView(R.layout.mylist);
@@ -30,21 +30,22 @@ public class MyProductActivity extends ActionBarActivity {
        // 需要显示的信息，名称，生产日期，功效，二维码
        cursor = DataSupport.findBySQL("select product_name,product_function,product_barcode,product_date,id as _id from product_tb where product_type=?",type);
 
-    final ListView listView = (ListView)findViewById(R.id.mylist);
+     final ListView listView = (ListView)findViewById(R.id.mylist);
+       myCursorAdapter = new MyCursorAdapter(this,cursor);
+       listView.setAdapter(myCursorAdapter);
 
        //长按删除
        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
            @Override
            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-               int index=position;
-               TextView textView=(TextView)view.findViewById(R.id.product_name);
-               String del_data =textView.getText().toString();
-               Toast.makeText(MyProductActivity.this, del_data, Toast.LENGTH_SHORT).show();
+               int index = position;
+               TextView textView = (TextView) view.findViewById(R.id.product_barcode);
+               String del_data = textView.getText().toString();
+               DataSupport.deleteAll(product_tb.class, "product_barcode=?", del_data);
+               myCursorAdapter.notifyDataSetChanged();
                return false;
            }
        });
-       MyCursorAdapter myCursorAdapter = new MyCursorAdapter(this,cursor);
-       listView.setAdapter(myCursorAdapter);
 
        getSupportActionBar().setIcon(R.drawable.ic_launcher);
 

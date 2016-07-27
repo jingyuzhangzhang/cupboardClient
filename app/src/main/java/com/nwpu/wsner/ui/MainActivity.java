@@ -216,7 +216,7 @@ public class MainActivity extends ActionBarActivity {
 
                 }
 
-
+                cursor.close();
             } catch (JSONException e) {
                 e.printStackTrace();
             }

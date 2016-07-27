@@ -41,11 +41,12 @@ public class MyCursorAdapter extends CursorAdapter{
         TextView p_name = (TextView)view.findViewById(R.id.product_name);
         TextView p_bcode=(TextView)view.findViewById(R.id.product_barcode);
         if (function==null) {
-            p_name.setText("商品名称:"+name+"生产日期:"+date+"功能:暂未收录");
+            p_name.setText("商品名称:"+name+"  生产日期:"+date+"  功能:暂未收录");
         }
         else {
-            p_name.setText("商品名称:" + name + "生产日期:" + date + "功能" + function);
+            p_name.setText("商品名称:" + name + "  生产日期:" + date + "  功能" + function);
         }
         p_bcode.setText(barcode);
     }
+
 }
