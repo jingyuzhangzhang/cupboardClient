@@ -37,7 +37,7 @@ import cz.msebera.android.httpclient.Header;
  * Use the {@link LoginFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class LoginFragment extends Fragment {
+public class SigninFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -51,10 +51,10 @@ public class LoginFragment extends Fragment {
 
     SharedPreferences sharedPreferences;
 
-    Button loginButton,signinButton;
-    EditText userNameEditText,pwdEditText;
+    Button signin_sigin_Button;
+    EditText name_signin_EditText,pwd_signin_EditText,age_signin_EditText,skinstate_signin_EditText;
 
-    public LoginFragment() {
+    public SigninFragment() {
         // Required empty public constructor
     }
 
@@ -91,39 +91,36 @@ public class LoginFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         Log.e("test","onCREateView");
-        View view=inflater.inflate(R.layout.fragment_login, container, false);
+        View view=inflater.inflate(R.layout.fragment_signin, container, false);
 
         init();
-        loginButton = (Button) view.findViewById(R.id.loginButton);
-        pwdEditText = (EditText) view.findViewById(R.id.pwdEditText);
-        userNameEditText = (EditText) view.findViewById(R.id.userNameEditText);
-        signinButton= (Button) view.findViewById(R.id.signinButton);
+        signin_sigin_Button = (Button) view.findViewById(R.id.Signin_sigin_Button);
+        pwd_signin_EditText = (EditText) view.findViewById(R.id.Password_sigin_Edittext);
+        name_signin_EditText = (EditText) view.findViewById(R.id.Name_sigin_Edittext);
+        age_signin_EditText = (EditText) view.findViewById(R.id.age_sigin_Edittext);
+        skinstate_signin_EditText = (EditText)view.findViewById(R.id.skinstate_sigin_Edittext);
 
-        signinButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.contentFrame, Fragment
-                                .instantiate(getActivity(), Fragments.SIGNIN .getFragment()))
-                        .commit();
-            }
-        });
-        loginButton.setOnClickListener(new View.OnClickListener() {
+        Log.e("test","afterinit");
+
+
+        signin_sigin_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.e("test","sigin onclick");
-                if (userNameEditText.getText().equals(null)||pwdEditText.getText().equals(null)){
+                if (name_signin_EditText.getText().equals(null)||pwd_signin_EditText.getText().equals(null)||age_signin_EditText.equals(null)||skinstate_signin_EditText.equals(null)){
                     Toast.makeText(getActivity(),"请输入用户名和密码",Toast.LENGTH_LONG).show();
                 }else {
-                    sharedPreferences= getActivity().getPreferences(Context.MODE_WORLD_WRITEABLE);
-                    SharedPreferences.Editor editor =sharedPreferences.edit();
-                    editor.putString("name", String.valueOf(userNameEditText.getText()));
-                    editor.putString("pwd", String.valueOf(pwdEditText.getText()));
+//                    sharedPreferences= getActivity().getPreferences(Context.MODE_WORLD_WRITEABLE);
+//                    SharedPreferences.Editor editor =sharedPreferences.edit();
+//                    editor.putString("name", String.valueOf(name_signin_EditText.getText()));
+//                    editor.putString("pwd", String.valueOf(pwd_signin_EditText.getText()));
 
                     AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
                     RequestParams requestParams = new RequestParams();
-
-                    String URL= Url.LOGIN_URL+"username="+userNameEditText.getText()+"&password="+pwdEditText.getText();
+                    String URL= Url.SIGIN_URL+"username="+name_signin_EditText.getText()+
+                            "&password="+pwd_signin_EditText.getText()+
+                            "&age="+Integer.valueOf(String.valueOf(age_signin_EditText.getText()))+
+                            "&skinType="+skinstate_signin_EditText.getText();
                     Log.e("url",URL);
                     asyncHttpClient.post(URL,requestParams,new AsyncHttpResponseHandler() {
                         @Override
@@ -133,10 +130,10 @@ public class LoginFragment extends Fragment {
                                 String s =jsonObject.getString("result");
                                 Log.e("s",s);
                                 if (s.equals("1")){
-                                    Toast.makeText(getActivity(),"登录成功",Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getActivity(),"注册成功",Toast.LENGTH_LONG).show();
 
                                 }else{
-                                    Toast.makeText(getActivity(),"用户名或密码错误",Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getActivity(),"注册失败,请重试",Toast.LENGTH_LONG).show();
 
                                 }
                             } catch (JSONException e) {
@@ -148,7 +145,7 @@ public class LoginFragment extends Fragment {
 
                         @Override
                         public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
-                            Toast.makeText(getActivity(),"请重试",Toast.LENGTH_LONG).show();
+                            Toast.makeText(getActivity(),"网络故障,请重试",Toast.LENGTH_LONG).show();
 
                         }
                     });

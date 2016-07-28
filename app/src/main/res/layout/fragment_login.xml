@@ -33,6 +33,9 @@
             android:layout_height="wrap_content"
             android:text="@string/login"
             android:id="@+id/loginButton"
+            android:textSize="@dimen/text_size_medium"
+            android:textColor="@color/white"
+            android:background="@drawable/button_basic"
             android:layout_gravity="center_horizontal" />
 
         <Button
@@ -40,6 +43,9 @@
             android:layout_height="wrap_content"
             android:text="@string/sigin"
             android:id="@+id/signinButton"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_medium"
+            android:background="@drawable/button_basic"
             android:layout_gravity="right" />
     </LinearLayout>
 

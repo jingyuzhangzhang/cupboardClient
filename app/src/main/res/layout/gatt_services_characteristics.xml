@@ -86,32 +86,70 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:background="@drawable/button_basic"
+            android:textSize="@dimen/text_size_medium"
             android:text="@string/BeginTestButton"
             android:id="@+id/BeginTestButton" />
     </LinearLayout>
 
-    <LinearLayout android:orientation="horizontal"
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp">
+        android:layout_height="match_parent">
 
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/dry"
-            android:inputType="none" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/resultLayout">
 
-        <ProgressBar
-            android:layout_width="fill_parent"
-            android:layout_height="15sp"
-            android:background="@drawable/icon_skin_process_bg"/>
+            <LinearLayout android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:weightSum="1">
 
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/moist"
-            android:inputType="none" />
+                <TextView
+                    android:layout_width="0sp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/dry"
+                    android:textSize="@dimen/text_size_small"
+                    android:layout_weight="0.1"
+                    android:textColor="#d7405d" />
+
+                <ProgressBar
+                    android:layout_width="0sp"
+                    android:layout_height="15sp"
+                    android:id="@+id/moistProgressBar"
+                    android:background="@drawable/icon_skin_process_bg"
+                    android:layout_weight="0.8" />
+
+                <TextView
+                    android:layout_width="0sp"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_size_small"
+                    android:text="@string/moist"
+                    android:layout_weight="0.1"
+                    android:textColor="#2c80f8" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_margin="@dimen/text_size_medium">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/afterTestText"
+                    android:textSize="@dimen/text_size_medium"/>
+            </LinearLayout>
+        </LinearLayout>
+
     </LinearLayout>
+
     <!--<ExpandableListView android:id="@+id/gatt_services_list"-->
             <!--android:layout_width="match_parent"-->
             <!--android:layout_height="wrap_content"/>-->

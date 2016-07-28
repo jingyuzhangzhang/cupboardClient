@@ -67,8 +67,8 @@ public class FragmentThree extends Fragment {
 //                    Log.e("test",j+"****"+list[j]);
                 }
                 weatherTextView.setText(list[3]);
-                tempHighTextView.setText(list[11]);
-                tempLowTextView.setText(list[12]);
+                tempHighTextView.setText(list[11]+"℃");
+                tempLowTextView.setText(list[12]+"℃");
                 ssd_sTextView.setText(list[39]);
                 zwx_sTextView.setText(list[38]);
 
@@ -81,7 +81,6 @@ public class FragmentThree extends Fragment {
 
             }
         });
-
 
 
 
