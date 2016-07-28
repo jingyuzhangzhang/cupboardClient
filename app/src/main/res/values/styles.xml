@@ -43,15 +43,24 @@
     </style>
     <style name="MyTheme" parent="@android:style/Theme.Holo.Light" >
         <item name="android:actionBarStyle">@style/myactionbar</item>
+        <item name="android:actionMenuTextColor">@android:color/white</item>
+        <item name="android:actionMenuTextAppearance">@style/actionbarmunetextstyle</item>
     </style>
 
     <style name="myactionbar" parent="@android:style/Widget.Holo.Light.ActionBar">
         <item name="android:background">@color/pink1</item>
         <item name="android:titleTextStyle">@style/actionbartextstyle</item>
+        <!--<item name="android:actionMenuTextAppearance">@style/actionbarmunetextstyle</item>-->
     </style>
 
     <style name="actionbartextstyle">
         <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/text_size_medium</item>
+    </style>
+
+    <style name="actionbarmunetextstyle">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">@dimen/text_size_medium</item>
     </style>
 
 </resources>
