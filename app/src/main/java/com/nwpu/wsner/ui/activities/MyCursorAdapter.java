@@ -1,4 +1,4 @@
-package com.nwpu.wsner.ui;
+package com.nwpu.wsner.ui.activities;
 
 import android.content.Context;
 import android.database.Cursor;

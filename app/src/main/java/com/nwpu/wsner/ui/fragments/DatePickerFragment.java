@@ -48,10 +48,11 @@ public class DatePickerFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState){
         //获取date对象并且初始化
-        mDate = (Date)getArguments().getSerializable(EXTRA_DATE);
+//        mDate = (Date)getArguments().getSerializable(EXTRA_DATE);
+
         //Create a Calender to get the year,month, and day
         Calendar calendar = Calendar.getInstance();
-        calendar.setTime(mDate);
+//        calendar.setTime(mDate);
         int year = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
@@ -66,7 +67,7 @@ public class DatePickerFragment extends DialogFragment {
                 mDate = new GregorianCalendar(year, month, day).getTime();
 
                 //Update argument to preserve selected value on rotation
-                getArguments().putSerializable(EXTRA_DATE, mDate);
+//                getArguments().putSerializable(EXTRA_DATE, mDate);
             }
         });
 

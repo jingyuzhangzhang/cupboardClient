@@ -1,5 +1,6 @@
 package com.nwpu.wsner.ui;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -24,6 +25,7 @@ import butterknife.OnItemClick;
 import com.nwpu.wsner.R;
 import com.nwpu.wsner.data.Fragments;
 import com.nwpu.wsner.data.model.NavigationDrawerItem;
+import com.nwpu.wsner.lib.CaptureActivity;
 import com.nwpu.wsner.ui.fragments.FragmentAbout;
 import com.nwpu.wsner.ui.fragments.FragmentOne;
 import com.nwpu.wsner.ui.fragments.FragmentThree;
@@ -155,7 +157,10 @@ public class MainActivity extends ActionBarActivity {
         if (mDrawerToggle.onOptionsItemSelected(item)) {
             return true;
         } else if (item.getItemId() == R.id.action_settings) {
-            return true;
+
+            Intent intent =new Intent(this,CaptureActivity.class);
+            startActivity(intent);
+
         }
         return super.onOptionsItemSelected(item);
     }

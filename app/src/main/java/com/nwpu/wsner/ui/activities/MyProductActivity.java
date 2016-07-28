@@ -1,11 +1,14 @@
-package com.nwpu.wsner.ui;
+package com.nwpu.wsner.ui.activities;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.DrawableRes;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
@@ -38,19 +41,24 @@ public class MyProductActivity extends ActionBarActivity {
 
     final ListView listView = (ListView)findViewById(R.id.mylist);
        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+
            @Override
-           public boolean onItemLongClick(AdapterView<?> parent, final View view, final int position, long id) {
+           public boolean onItemLongClick(final AdapterView<?> parent, final View view, final int position, final long id) {
                new AlertDialog.Builder(MyProductActivity.this).setTitle("确定删除该物品？").setPositiveButton("是", new DialogInterface.OnClickListener() {
                    @Override
                    public void onClick(DialogInterface dialog, int which) {
                        //删除Item
+                       listView.removeView(parent.getChildAt(position));
+
 
                         Toast.makeText(MyProductActivity.this, "成功删除该物品", Toast.LENGTH_SHORT).show();
                        //删除数据库里的物品
                    }
                }).setNegativeButton("返回", null).show();
 
-
+        if (listView.isSelected()){
+            listView.setBackgroundColor(getColor(R.color.grey_background));
+        }
 //               int index=position;
 //               TextView textView=(TextView)view.findViewById(R.id.product_name);
 //               String del_data =textView.getText().toString();
