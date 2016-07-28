@@ -41,5 +41,17 @@
     <style name="RobotoTextView.Fragment">
         <item name="android:textSize">@dimen/text_size_xlarge</item>
     </style>
+    <style name="MyTheme" parent="@android:style/Theme.Holo.Light" >
+        <item name="android:actionBarStyle">@style/myactionbar</item>
+    </style>
+
+    <style name="myactionbar" parent="@android:style/Widget.Holo.Light.ActionBar">
+        <item name="android:background">@color/pink1</item>
+        <item name="android:titleTextStyle">@style/actionbartextstyle</item>
+    </style>
+
+    <style name="actionbartextstyle">
+        <item name="android:textColor">@color/white</item>
+    </style>
 
 </resources>

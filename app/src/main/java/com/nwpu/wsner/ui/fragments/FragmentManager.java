@@ -90,7 +90,7 @@ public class FragmentManager extends Fragment {
                 break;
             case R.id.uvprotect:intent.putExtra("type","uvprotect");
                 break;
-            case R.id.mask:intent.putExtra("tyoe","mask");
+            case R.id.mask:intent.putExtra("type","mask");
                 break;
 
         }

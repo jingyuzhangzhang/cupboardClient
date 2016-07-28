@@ -39,7 +39,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="user_name_edit" >name</string>
+    <string name="user_name_edit">name</string>
     <string name="sigin">注册账户</string>
     <string name="login">登录</string>
     <!-- LMY‘s-->
@@ -75,10 +75,8 @@
     <string name="ScanButton">搜索设备</string>
     <string name="dry">干燥</string>
     <string name="moist">水润</string>
+    <string name="afterTestText">恭喜,您此刻的肌肤水分值在同龄人群中处于偏高水平,肌肤呈现水润状态,护肤保养工作到位,未来两小时请注意再次测试,以监测肌肤水分流失速度,建议此期间喝水300ml左右,以维持体内水循环</string>
+    <string name="age">年  龄</string>
+    <string name="skinState">肌肤类型</string>
 
-
-    <style name="AcBar_titleStyle">
-
-        <item name="android:textColor">#FFFFFF</item>
-    </style>
 </resources>
