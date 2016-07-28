@@ -14,6 +14,7 @@ import butterknife.InjectView;
 import com.nwpu.wsner.R;
 import com.nwpu.wsner.ui.activities.MyProductActivity;
 
+
 /**
  * Created by Michal Bialas on 19/07/14.
  */

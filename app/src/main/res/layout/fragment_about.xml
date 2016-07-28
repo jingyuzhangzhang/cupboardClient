@@ -12,12 +12,22 @@
         <com.devspark.robototextview.widget.RobotoTextView
                 style="@style/Wrap"
                 android:id="@+id/aboutTextView"
-                app:typeface="roboto_light"/>
+                app:typeface="roboto_light"
+            app:fontFamily="roboto"
+            android:textSize="@dimen/text_size_medium"
+
+            android:text="@string/about_text"
+            />
 
         <com.devspark.robototextview.widget.RobotoTextView
                 style="@style/Wrap"
                 android:id="@+id/aboutTextViewAdditionalText"
-                app:typeface="roboto_light"/>
+                app:typeface="roboto_light"
+            app:fontFamily="roboto"
+            android:textSize="@dimen/text_size_medium"
+
+            android:text="@string/about_text2"
+            />
 
         <com.devspark.robototextview.widget.RobotoTextView
                 style="@style/Wrap"

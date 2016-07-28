@@ -24,14 +24,14 @@
     <string name="content_description">image view</string>
 
 
-    <string name="about_text">This application is an example of a Navigation Drawer implementation using a new/bind pattern and the ButterKnife library.</string>
-    <string name="about_text2">It was written only for development purposes.</string>
+    <string name="about_text">化妆柜小管家</string>
+    <string name="about_text2">您的专属护肤顾问</string>
 
-    <string name="about_author">Author: Michal Bialas</string>
-    <string name="about_contact">Contact: mmbialas@gmail.com</string>
-    <string name="about_libraries">Libraries:</string>
-    <string name="about_butterknife">ButterKnife by Jake Wharton</string>
-    <string name="about_robototextview">RobotoTextView by Evgeny Shishkin</string>
+    <string name="about_author">Author: WSN小分队</string>
+    <string name="about_contact">Contact: wsn.nwpu.info</string>
+    <string name="about_libraries">简介:</string>
+    <string name="about_butterknife">西北工业大学</string>
+    <string name="about_robototextview">移动计算与传感器网络实验室</string>
 
     <string name="about_msg_subject">[NavigationDrawerSI]</string>
     <string name="about_mail_chooser">Send with</string>
@@ -79,13 +79,4 @@
     <string name="age">年  龄</string>
     <string name="skinState">肌肤类型</string>
 
-    <style name="my_actionbar_style" parent="@android:style/Widget.Holo.Light.ActionBar">
-        <item name="android:background">#647b97</item>
-        <item name="android:titleTextStyle">@style/AcBar_titleStyle</item>
-    </style>
-
-    <style name="AcBar_titleStyle">
-
-        <item name="android:textColor">#FFFFFF</item>
-    </style>
 </resources>
