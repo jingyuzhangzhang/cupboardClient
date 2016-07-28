@@ -15,7 +15,7 @@
             android:layout_width="@dimen/navigation_drawer_width"
             android:layout_height="match_parent"
             android:layout_gravity="start"
-            android:background="@color/basic_blue"
+            android:background="@color/basic_pink"
             android:orientation="vertical">
 
         <RelativeLayout
@@ -32,7 +32,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="16dp"
                     android:contentDescription="@string/app_name"
-                    android:src="@drawable/my_photo_for_drawer"/>
+                    android:src="@drawable/icon_area_youlin"/>
 
             <TextView
                     android:id="@+id/drawerUserName"

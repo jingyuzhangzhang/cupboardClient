@@ -7,6 +7,7 @@ import com.nwpu.wsner.ui.fragments.FragmentOne;
 import com.nwpu.wsner.ui.fragments.FragmentThree;
 import com.nwpu.wsner.ui.fragments.FragmentManager;
 import com.nwpu.wsner.ui.fragments.LoginFragment;
+import com.nwpu.wsner.ui.fragments.SigninFragment;
 
 /**
  * Created by Michal Bialas on 19/07/14.
@@ -15,7 +16,7 @@ import com.nwpu.wsner.ui.fragments.LoginFragment;
 public enum Fragments {
 
     TEST(FragmentOne.class), MANAGEMENT(FragmentManager.class), FIND(FragmentThree.class), ABOUT(
-            FragmentAbout.class),LOGIN(LoginFragment.class);
+            FragmentAbout.class),LOGIN(LoginFragment.class),SIGNIN(SigninFragment.class);
 
     final Class<? extends Fragment> fragment;
 

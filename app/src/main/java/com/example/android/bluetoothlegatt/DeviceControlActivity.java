@@ -29,15 +29,20 @@ import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.Message;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ExpandableListView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.SimpleExpandableListAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.nwpu.wsner.R;
 
@@ -70,6 +75,8 @@ public class DeviceControlActivity extends Activity {
     private BluetoothGattCharacteristic mNotifyCharacteristic;
     public Button mBeginTestButton;
     public ProgressDialog myDialog = null;
+    ProgressBar mProgressBar;
+    LinearLayout mLinearLayout;
 
     private final String LIST_NAME = "NAME";
     private final String LIST_UUID = "UUID";
@@ -119,7 +126,7 @@ public class DeviceControlActivity extends Activity {
                 // Show all the supported services and characteristics on the user interface.
 //                displayGattServices(mBluetoothLeService.getSupportedGattServices());
             } else if (BluetoothLeService.ACTION_DATA_AVAILABLE.equals(action)) {
-                displayData(intent.getStringExtra(BluetoothLeService.EXTRA_DATA));
+//                displayData(intent.getStringExtra(BluetoothLeService.EXTRA_DATA));
             }
         }
     };
@@ -164,42 +171,66 @@ public class DeviceControlActivity extends Activity {
 //        mDataField.setText(R.string.no_data);
     }
 
+    Handler cwjHandler = new Handler();
+    final Runnable mUpdateResults = new Runnable() {
+        public void run() {
+            Random r = new Random();
+            int i = r.nextInt(2)+2;
+            int j= r.nextInt(9);
+            int k= r.nextInt(9);
+            int result = 10*i+j;
+            mComesticTextview.setText(String.valueOf(i)+String.valueOf(j)+"."+String.valueOf(j)+"%");
+            mProgressBar.setProgress(result);
+            mLinearLayout.setVisibility(View.VISIBLE);
+        }
+    };
+
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.gatt_services_characteristics);
+        mProgressBar= (ProgressBar) findViewById(R.id.moistProgressBar);
+        mLinearLayout = (LinearLayout) findViewById(R.id.resultLayout);
         mBeginTestButton= (Button) findViewById(R.id.BeginTestButton);
         mComesticTextview = (TextView) findViewById(R.id.cowsmeticData);
+        mLinearLayout.setVisibility(View.INVISIBLE);
+
+
         mBeginTestButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final CharSequence strDialogTitle = getString(R.string.str_dialog_title);
-                final CharSequence strDialogBody = getString(R.string.str_dialog_body);
-                // 显示Progress对话框
-                myDialog = ProgressDialog.show(DeviceControlActivity.this, strDialogTitle,
-                        strDialogBody, true);
-                new Thread() {
-                    public void run() {
-                        try {
+                if (mConnected){
+                    final CharSequence strDialogTitle = getString(R.string.str_dialog_title);
+                    final CharSequence strDialogBody = getString(R.string.str_dialog_body);
+                    // 显示Progress对话框
+                    myDialog = ProgressDialog.show(DeviceControlActivity.this, strDialogTitle,
+                            strDialogBody, true);
+                    Thread mthread = new Thread() {
+                        public void run() {
+                            try {
                         /* 在这里写上要背景执行的程序片段 */
                         /* 为了明显看见效果，以暂停3秒作为示范 */
-                            sleep(3000);
-                            Random r = new Random();
-                            int i = r.nextInt(2)+2;
-                            int j= r.nextInt(9);
-                            int k= r.nextInt(9);
-                            mComesticTextview.setText(String.valueOf(i)+String.valueOf(j)+"."+k+"%");
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        } finally { // 卸除所建立的myDialog对象。
-                            myDialog.dismiss();
-                        }
-                    }
-                }.start(); /* 开始执行线程 */
+                                sleep(3000);
+                                cwjHandler.post(mUpdateResults);
 
+
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            } finally { // 卸除所建立的myDialog对象。
+                                myDialog.dismiss();
+                            }
+                        }
+                    };
+                    mthread.start();
+                    /* 开始执行线程 */
+                }else {
+                    Toast.makeText(getApplicationContext(),"请连接水分测试仪",Toast.LENGTH_LONG).show();
+                }
             }
         });
+
+
 
         final Intent intent = getIntent();
         mDeviceName = intent.getStringExtra(EXTRAS_DEVICE_NAME);
@@ -220,6 +251,9 @@ public class DeviceControlActivity extends Activity {
 
         bindService(gattServiceIntent, mServiceConnection, BIND_AUTO_CREATE);
     }
+
+
+
 
     @Override
     protected void onResume() {

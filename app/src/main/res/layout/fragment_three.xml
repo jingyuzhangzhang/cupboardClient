@@ -74,7 +74,8 @@
         </TableRow>
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginTop="10sp">
 
             <TextView
                 android:id="@+id/zwx_s"
@@ -88,7 +89,8 @@
         </TableRow>
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginTop="10sp">
 
             <TextView
                 android:id="@+id/ssd_s"

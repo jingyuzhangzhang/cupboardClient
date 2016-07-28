@@ -47,7 +47,7 @@ public class FragmentOne extends Fragment {
     @InjectView(R.id.circleLayout)
     LinearLayout circleLayout;
 
-    Button GattButton,ReGattButton;
+    Button GattButton;
     BluetoothleService mBluetoothleService;
     private BluetoothAdapter mBluetoothAdapter;
     private final static String TAG = BluetoothleService.class.getSimpleName();
