@@ -22,6 +22,9 @@ import com.nwpu.wsner.constants.Url;
 import com.nwpu.wsner.data.Fragments;
 import com.nwpu.wsner.ui.MainActivity;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import butterknife.InjectView;
 import butterknife.OnClick;
 import cz.msebera.android.httpclient.Header;
@@ -102,7 +105,6 @@ public class LoginFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Log.e("test","sigin onclick");
-                Toast.makeText(getActivity(),"请输入用户名和密码",Toast.LENGTH_LONG).show();
                 if (userNameEditText.getText().equals(null)||pwdEditText.getText().equals(null)){
                     Toast.makeText(getActivity(),"请输入用户名和密码",Toast.LENGTH_LONG).show();
                 }else {
@@ -110,14 +112,29 @@ public class LoginFragment extends Fragment {
                     SharedPreferences.Editor editor =sharedPreferences.edit();
                     editor.putString("name", String.valueOf(userNameEditText.getText()));
                     editor.putString("pwd", String.valueOf(pwdEditText.getText()));
+
                     AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
                     RequestParams requestParams = new RequestParams();
-                    requestParams.put("name", String.valueOf(userNameEditText.getText()));
-                    requestParams.put("pwd", String.valueOf(pwdEditText.getText()));
-
-                    asyncHttpClient.get(Url.LOGIN_URL,requestParams,new AsyncHttpResponseHandler() {
+                    String URL= Url.LOGIN_URL+"username="+userNameEditText.getText()+"&password="+pwdEditText.getText();
+                    Log.e("url",URL);
+                    asyncHttpClient.post(URL,requestParams,new AsyncHttpResponseHandler() {
                         @Override
                         public void onSuccess(int i, Header[] headers, byte[] bytes) {
+                            try {
+                                JSONObject jsonObject= new JSONObject(new String(bytes));
+                                String s =jsonObject.getString("result");
+                                Log.e("s",s);
+                                if (s.equals("1")){
+                                    Toast.makeText(getActivity(),"登录成功",Toast.LENGTH_LONG).show();
+
+                                }else{
+                                    Toast.makeText(getActivity(),"用户名或密码错误",Toast.LENGTH_LONG).show();
+
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
 
                         }
 

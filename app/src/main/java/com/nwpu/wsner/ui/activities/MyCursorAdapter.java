@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import com.nwpu.wsner.R;
 
+import org.w3c.dom.Text;
+
 /**
  * Created by lmy on 16/7/22.
  */
@@ -33,8 +35,18 @@ public class MyCursorAdapter extends CursorAdapter{
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
         String name = cursor.getString(cursor.getColumnIndex("product_name"));
+        String date = cursor.getString(cursor.getColumnIndex("product_date"));
+        String barcode = cursor.getString(cursor.getColumnIndex("product_barcode"));
+        String function = cursor.getString(cursor.getColumnIndex("product_function"));
         TextView p_name = (TextView)view.findViewById(R.id.product_name);
-        p_name.setText("商品名称"+name);
-
+        TextView p_bcode=(TextView)view.findViewById(R.id.product_barcode);
+        if (function==null) {
+            p_name.setText("商品名称:"+name+"  生产日期:"+date+"  功能:暂未收录");
+        }
+        else {
+            p_name.setText("商品名称:" + name + "  生产日期:" + date + "  功能" + function);
+        }
+        p_bcode.setText(barcode);
     }
+
 }

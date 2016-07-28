@@ -64,7 +64,7 @@ public class FragmentThree extends Fragment {
 //                weatherTextView.setText(weathers[0]);
                 String[] list =s.split("<.*?>\n<.*?>");
                 for (int j=0;j<list.length;j++){
-                    Log.e("test",j+"****"+list[j]);
+//                    Log.e("test",j+"****"+list[j]);
                 }
                 weatherTextView.setText(list[3]);
                 tempHighTextView.setText(list[11]);

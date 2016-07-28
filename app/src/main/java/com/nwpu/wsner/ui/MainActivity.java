@@ -2,11 +2,13 @@ package com.nwpu.wsner.ui;
 
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,23 +16,34 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 import butterknife.OnItemClick;
+
+import com.example.android.bluetoothlegatt.DeviceScanActivity;
 import com.nwpu.wsner.R;
 import com.nwpu.wsner.data.Fragments;
 import com.nwpu.wsner.data.model.NavigationDrawerItem;
 import com.nwpu.wsner.lib.CaptureActivity;
+import com.nwpu.wsner.model.product_tb;
 import com.nwpu.wsner.ui.fragments.FragmentAbout;
 import com.nwpu.wsner.ui.fragments.FragmentOne;
 import com.nwpu.wsner.ui.fragments.FragmentThree;
 import com.nwpu.wsner.ui.fragments.FragmentManager;
 import com.nwpu.wsner.ui.navigationdrawer.NavigationDrawerView;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.litepal.crud.DataSupport;
+
 import timber.log.Timber;
 
 /**
@@ -43,7 +56,7 @@ import timber.log.Timber;
 public class MainActivity extends ActionBarActivity {
 
     private static final String STATE_SELECTED_POSITION = "selected_navigation_drawer_position";
-
+    private product_tb productData=null;
     private int currentSelectedPosition = 0;
 
     @InjectView(R.id.navigationDrawerListViewWrapper)
@@ -84,7 +97,7 @@ public class MainActivity extends ActionBarActivity {
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().add(R.id.contentFrame,
-                    Fragment.instantiate(MainActivity.this, Fragments.TEST.getFragment())).commit();
+                    Fragment.instantiate(MainActivity.this, Fragments.MANAGEMENT.getFragment())).commit();
         } else {
             currentSelectedPosition = savedInstanceState.getInt(STATE_SELECTED_POSITION);
         }
@@ -159,12 +172,58 @@ public class MainActivity extends ActionBarActivity {
         } else if (item.getItemId() == R.id.action_settings) {
 
             Intent intent =new Intent(this,CaptureActivity.class);
-            startActivity(intent);
+            startActivityForResult(intent, 0);
+
+//            startActivity(intent);
 
         }
         return super.onOptionsItemSelected(item);
     }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        String product_barcode;
+        String product_name;
+        String product_date;
+        String product_valid;
+        String product_function;
+        String product_type;
+        String formatType="yyyy-MM-dd";
+        if(resultCode==RESULT_OK){
+            try {
+                //"productBarcode":"49325263","productName":"药用面霜","productionDate":1469462400000,"productionValid":1500998400000,"productFunction":null,"productType":"霜","productNumber":3,"skinAvailability":null,"username":"sun"}}
+                JSONObject json1=new JSONObject(data.getStringExtra("jsonData"));
+                JSONObject jsonObject = new JSONObject(json1.getString("product"));
+                product_barcode=jsonObject.getString("productBarcode");
+                product_name=jsonObject.getString("productName");
+                Date date = new Date(jsonObject.getLong("productionDate"));
+                product_date= new SimpleDateFormat(formatType).format(date);
+                product_valid=jsonObject.getString("productionValid");
+                product_function=jsonObject.getString("productFunction");
+                product_type=jsonObject.getString("productType");
+                Cursor  cursor = DataSupport.findBySQL("select id as _id from product_tb where product_barcode=?", product_barcode);
 
+                Toast.makeText(MainActivity.this,"成功添加该护肤品",Toast.LENGTH_LONG).show();
+                //判断数据库是否有相同数据
+                if(cursor.moveToFirst()){
+
+                    Toast.makeText(MainActivity.this,"已有该护肤品",Toast.LENGTH_LONG).show();
+                }
+                else
+                {
+                    productData=new product_tb(product_barcode,product_name,product_date,"3年",product_function,product_type);
+                    productData.save();
+                    Toast.makeText(MainActivity.this,"成功添加该护肤品",Toast.LENGTH_LONG).show();
+
+                }
+
+                cursor.close();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        }
+        //    System.out.print(data.getStringExtra("jsonData"));
+    }
     @OnItemClick(R.id.leftDrawerListView)
     public void OnItemClick(int position, long id) {
         if (mDrawerLayout.isDrawerOpen(mLinearDrawerLayout)) {
@@ -203,6 +262,9 @@ public class MainActivity extends ActionBarActivity {
     private void onNavigationDrawerItemSelected(int position) {
         switch (position) {
             case 0:
+//                Intent i = new Intent(MainActivity.this,DeviceScanActivity.class);
+//                i.setClass(MainActivity.this, DeviceScanActivity.class);
+//                MainActivity.this.startActivity(i);
                 if (!(getSupportFragmentManager().getFragments()
                         .get(0) instanceof FragmentOne)) {
                     getSupportFragmentManager().beginTransaction()
