@@ -6,28 +6,37 @@
                 android:id="@+id/fragmentThree"
                 android:background="@color/bg_yellow">
 
-    <TableLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true">
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:orientation="vertical"
+      android:layout_marginTop="20dp">
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal">
+          <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="当前城市："
+              android:textSize="@dimen/text_size_large"
+              >
+
+          </TextView>
             <TextView
                 android:id="@+id/city"
-                android:layout_width="100sp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/cityname"
-                android:textSize="@dimen/text_size_large">
-
+                android:textSize="@dimen/text_size_large"
+                >
             </TextView>
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+      </LinearLayout>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
             <TextView
                 android:layout_width="100sp"
                 android:layout_height="wrap_content"
@@ -41,10 +50,12 @@
                 android:text="@string/weather"
                 android:textSize="@dimen/text_size_medium">
             </TextView>
-        </TableRow>
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+
+</LinearLayout>
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal">
             <TextView
                 android:layout_width="100sp"
                 android:layout_height="wrap_content"
@@ -53,55 +64,54 @@
             </TextView>
             <TextView
                 android:id="@+id/temp_lowTextView"
-                android:layout_width="50sp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/temp"
                 android:textSize="@dimen/text_size_medium">
             </TextView>
             <TextView
-                android:layout_width="50sp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/bolanghao"
                 android:textSize="@dimen/text_size_medium">
             </TextView>
             <TextView
                 android:id="@+id/temp_highTextView"
-                android:layout_width="50sp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/temp"
                 android:textSize="@dimen/text_size_medium">
             </TextView>
-        </TableRow>
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="10sp">
-
+      </LinearLayout>
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
             <TextView
                 android:id="@+id/zwx_s"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/temp"
+                android:text="紫外线信息"
                 android:textSize="@dimen/text_size_medium"
                 android:layout_span="4">
             </TextView>
+        </LinearLayout>
 
-        </TableRow>
-        <TableRow
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="10sp">
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
 
             <TextView
                 android:id="@+id/ssd_s"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/temp"
+                android:text="出游情况"
                 android:textSize="@dimen/text_size_medium"
                 android:nestedScrollingEnabled="false"
                 android:layout_span="4">
             </TextView>
+        </LinearLayout>
+</LinearLayout>
 
-        </TableRow>
-    </TableLayout>
+
 </RelativeLayout>

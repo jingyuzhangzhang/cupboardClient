@@ -324,6 +324,7 @@ public class CaptureActivity extends Activity implements Callback,DatePickerFrag
 			public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
 
 				Toast.makeText(CaptureActivity.this,"请联网",Toast.LENGTH_SHORT).show();
+				finish();
 			}
 
 			@Override
