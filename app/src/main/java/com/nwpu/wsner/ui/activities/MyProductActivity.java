@@ -1,5 +1,7 @@
 package com.nwpu.wsner.ui.activities;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -8,7 +10,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.nwpu.wsner.R;
 import com.nwpu.wsner.model.product_tb;
@@ -40,9 +41,17 @@ public class MyProductActivity extends ActionBarActivity {
            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                int index = position;
                TextView textView = (TextView) view.findViewById(R.id.product_barcode);
-               String del_data = textView.getText().toString();
-               DataSupport.deleteAll(product_tb.class, "product_barcode=?", del_data);
-               myCursorAdapter.notifyDataSetChanged();
+               final String del_data = textView.getText().toString();
+               new AlertDialog.Builder(MyProductActivity.this).setTitle("确认要删除该物品？").setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                   @Override
+                   public void onClick(DialogInterface dialog, int which) {
+
+
+                       DataSupport.deleteAll(product_tb.class, "product_barcode=?", del_data);
+                       myCursorAdapter.notifyDataSetChanged();
+                   }
+               }).setNegativeButton("返回",null).show();
+
                return false;
            }
        });
