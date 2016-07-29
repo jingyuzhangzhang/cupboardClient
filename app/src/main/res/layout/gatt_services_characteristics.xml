@@ -30,6 +30,7 @@
         <Space android:layout_width="5dp"
                android:layout_height="wrap_content"/>
         <TextView android:id="@+id/device_address"
+            android:textColor="@color/pink1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"/>
@@ -49,7 +50,8 @@
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:text="@string/disconnected"
-                  android:textSize="18sp"/>
+                  android:textSize="18sp"
+            android:textColor="@color/pink1"/>
     </LinearLayout>
     <LinearLayout android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -64,6 +66,7 @@
         <TextView android:id="@+id/cowsmeticData"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/pink1"
             android:textSize="18sp"/>
     </LinearLayout>
     <LinearLayout android:orientation="horizontal"

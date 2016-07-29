@@ -57,7 +57,8 @@ public class MainActivity extends ActionBarActivity {
 
     private static final String STATE_SELECTED_POSITION = "selected_navigation_drawer_position";
     private product_tb productData=null;
-    private int currentSelectedPosition = 0;
+    private int currentSelectedPosition = 1
+            ;
 
     @InjectView(R.id.navigationDrawerListViewWrapper)
     NavigationDrawerView mNavigationDrawerListViewWrapper;
