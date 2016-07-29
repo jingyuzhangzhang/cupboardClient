@@ -27,7 +27,7 @@ import java.util.GregorianCalendar;
 public class DatePickerFragment extends DialogFragment {
 
     public static final String EXTRA_DATE = "com.nwpu.wsner.cupboardClient.date";
-    private Date mDate=null;
+    private Date mDate=new GregorianCalendar(2016,7,30).getTime();;
     private Resultcallback mResultcallback;
     @Override
     public void onAttach(Activity activity){
